@@ -2,6 +2,7 @@ import axios from "axios";
 import { PostNew } from "./PostNew";
 import { PostsIndex } from "./PostsIndex";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export function Content() {
   const [posts, setPosts] = useState([]);
@@ -11,10 +12,11 @@ export function Content() {
       setPosts(response.data);
     });
   };
+  useEffect(handleIndexPosts, []);
+
   return (
     <div className="main">
       <PostNew />
-      <button onClick={handleIndexPosts}>Load Posts</button>
       <PostsIndex myPosts={posts} />
     </div>
   );
