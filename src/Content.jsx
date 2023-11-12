@@ -42,12 +42,29 @@ export function Content() {
       });
   };
 
+  const handleUpdatePost = (id, params) => {
+    axios.patch(`http://localhost:3000/posts/${id}.json`, params).then((response) => {
+      console.log(response.data);
+      setCurrentPost(response.data);
+      setPosts(
+        posts.map((post) => {
+          if (post.id === response.data.id) {
+            return response.data;
+          } else {
+            return post;
+          }
+        })
+      );
+      handleClose();
+    });
+  };
+
   return (
     <div className="container">
       <PostNew onCreatePost={handleCreatePost} />
       <PostsIndex myPosts={posts} onShowPost={handleShowPosts} />
       <Modal show={isPostShowVisible} onClose={handleClose}>
-        <ShowPost post={currentPost} />
+        <ShowPost post={currentPost} onUpdatePost={handleUpdatePost} />
       </Modal>
     </div>
   );
