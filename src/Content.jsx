@@ -4,6 +4,9 @@ import { PostsIndex } from "./PostsIndex";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Modal } from "./Modal";
+import { ShowPost } from "./ShowPost";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export function Content() {
   const [posts, setPosts] = useState([]);
@@ -27,16 +30,24 @@ export function Content() {
     setIsPostShowVisible(false);
   };
 
+  const handleCreatePost = (params) => {
+    axios
+      .post("http://localhost:3000/posts.json", params)
+      .then((response) => {
+        console.log(response.data);
+        setPosts([...posts, response.data]);
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+      });
+  };
+
   return (
-    <div className="main">
-      <PostNew />
+    <div className="container">
+      <PostNew onCreatePost={handleCreatePost} />
       <PostsIndex myPosts={posts} onShowPost={handleShowPosts} />
       <Modal show={isPostShowVisible} onClose={handleClose}>
-        <p>
-          <h2>{currentPost.title}</h2>
-          <p>{currentPost.body}</p>
-          <img src={currentPost.image} />
-        </p>
+        <ShowPost post={currentPost} />
       </Modal>
     </div>
   );

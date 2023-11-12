@@ -7,9 +7,9 @@ html {
 }
 
 header {
-  background-color: antiquewhite;
+  background-color: #faebd7;
   color:darkorange;
-  padding: 1em;
+  padding: 0.5em;
   border-radius: 1em;
   text-align: center;
 }
