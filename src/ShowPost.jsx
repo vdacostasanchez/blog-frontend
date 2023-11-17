@@ -6,6 +6,10 @@ export function ShowPost(props) {
     const params = new FormData(event.target);
     props.onUpdatePost(props.post.id, params);
   };
+
+  const handleClick = () => {
+    props.onDestroyPost(props.post);
+  };
   return (
     <div>
       <h2>{props.post.title}</h2>
@@ -24,6 +28,9 @@ export function ShowPost(props) {
         </div>
         <button type="submit">Update Blog Post</button>
       </form>
+      <button onClick={handleClick} className="btn btn-danger">
+        Delete Post
+      </button>
     </div>
   );
 }

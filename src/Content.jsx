@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Modal } from "./Modal";
 import { ShowPost } from "./ShowPost";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -59,12 +61,23 @@ export function Content() {
     });
   };
 
+  const handleDestroyPost = (post) => {
+    axios.delete(`http://localhost:3000/posts/${post.id}.json`).then((response) => {
+      console.log(response.data);
+      setPosts(posts.filter((r) => r.id !== post.id));
+
+      handleClose();
+    });
+  };
+
   return (
     <div className="container">
+      <Signup />
+      <Login />
       <PostNew onCreatePost={handleCreatePost} />
       <PostsIndex myPosts={posts} onShowPost={handleShowPosts} />
       <Modal show={isPostShowVisible} onClose={handleClose}>
-        <ShowPost post={currentPost} onUpdatePost={handleUpdatePost} />
+        <ShowPost post={currentPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
       </Modal>
     </div>
   );
