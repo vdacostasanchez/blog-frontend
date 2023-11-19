@@ -8,6 +8,7 @@ import { ShowPost } from "./ShowPost";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { Routes, Route } from "react-router-dom";
+import { PostsShowPage } from "./PostsShowPage";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -78,6 +79,9 @@ export function Content() {
         <Route path="/login" element={<Login />} />
         <Route path="/posts/new" element={<PostNew onCreatePost={handleCreatePost} />} />
         <Route path="/posts" element={<PostsIndex myPosts={posts} onShowPost={handleShowPosts} />} />
+        <Route path="/" element={<PostsIndex myPosts={posts} onShowPost={handleShowPosts} />} />
+
+        <Route path="/posts/:id" element={<PostsShowPage />} />
       </Routes>
 
       <Modal show={isPostShowVisible} onClose={handleClose}>

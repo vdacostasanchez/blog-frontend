@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { LogoutLink } from "./LogoutLink";
 
 export function Header() {
   return (
@@ -45,6 +46,9 @@ export function Header() {
                 <Link className="nav-link" to="/login">
                   Login
                 </Link>
+              </li>
+              <li className="nav-item">
+                <LogoutLink />
               </li>
             </ul>
           </div>
