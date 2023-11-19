@@ -7,6 +7,7 @@ import { Modal } from "./Modal";
 import { ShowPost } from "./ShowPost";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
+import { Routes, Route } from "react-router-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -72,10 +73,13 @@ export function Content() {
 
   return (
     <div className="container">
-      <Signup />
-      <Login />
-      <PostNew onCreatePost={handleCreatePost} />
-      <PostsIndex myPosts={posts} onShowPost={handleShowPosts} />
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/posts/new" element={<PostNew onCreatePost={handleCreatePost} />} />
+        <Route path="/posts" element={<PostsIndex myPosts={posts} onShowPost={handleShowPosts} />} />
+      </Routes>
+
       <Modal show={isPostShowVisible} onClose={handleClose}>
         <ShowPost post={currentPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
       </Modal>

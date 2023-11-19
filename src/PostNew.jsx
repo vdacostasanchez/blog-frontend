@@ -6,6 +6,7 @@ export function PostNew(props) {
 
     props.onCreatePost(params);
     event.target.reset();
+    window.location.href = "/posts";
   };
   return (
     <div id="posts-new">
