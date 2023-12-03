@@ -13,7 +13,13 @@ export function PostsIndex(props) {
         onChange={(event) => {
           setSearchFilter(event.target.value);
         }}
+        list="titles"
       ></input>
+      <datalist id="titles">
+        {props.myPosts.map((post) => (
+          <option key={post.id}>{post.title}</option>
+        ))}
+      </datalist>
       <div className="row">
         {props.myPosts
           .filter((post) => post.title.toLowerCase().includes(searchFilter.toLowerCase()))
